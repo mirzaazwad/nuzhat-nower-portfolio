@@ -60,7 +60,7 @@ export function PublicationCard({
         </p>
 
         <a
-          href={typeof pdf === "string" ? pdf : pdf.src}
+          href={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/${typeof pdf === "string" ? pdf : pdf.src}`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 text-sm font-medium text-accent-gold hover:text-accent-copper transition-colors"

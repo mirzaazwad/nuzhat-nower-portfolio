@@ -64,7 +64,8 @@ export const experience = [
     role: "C# .NET Developer",
     company: "InfoCrat Solution Ltd.",
     period: "Feb 2024 - May 2024",
-    description: "Developed applications using C#, ASP .NET, and MVC frameworks.",
+    description:
+      "Developed applications using C#, ASP .NET, and MVC frameworks.",
   },
   {
     id: "battery-low",
@@ -121,7 +122,8 @@ export const blogPosts = [
   {
     id: "blog-1",
     title: "Coming Soon",
-    excerpt: "Stay tuned for upcoming blog posts about technology, project management, and more.",
+    excerpt:
+      "Stay tuned for upcoming blog posts about technology, project management, and more.",
     image: "/images/blog.gif",
     date: "2024",
     tags: ["Upcoming"],

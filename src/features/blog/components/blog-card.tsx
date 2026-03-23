@@ -35,7 +35,7 @@ export function BlogCard({
       <Link href="#">
         <div className="relative aspect-video overflow-hidden rounded-xl bg-muted">
           <Image
-            src={image}
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH}${image}`}
             alt={title}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
