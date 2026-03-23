@@ -36,7 +36,7 @@ export default function AboutPage() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.6 }}
-              className="relative flex-shrink-0"
+              className="relative shrink-0"
             >
               {/* Laurel Wreath above - Greek symbol of victory */}
               <div className="absolute -top-6 left-1/2 -translate-x-1/2">
@@ -49,7 +49,7 @@ export default function AboutPage() {
                 <div className="absolute inset-2 rounded-full border-2 border-primary-green" />
                 <div className="absolute inset-4 rounded-full overflow-hidden">
                   <Image
-                    src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/images/image.jpg`}
+                    src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/images/kiss.jpg`}
                     alt={personalInfo.name}
                     fill
                     className="object-cover"
