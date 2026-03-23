@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FilePdf, Calendar } from "@phosphor-icons/react";
+import { FilePdfIcon, CalendarIcon } from "@phosphor-icons/react";
 import { Badge } from "@/components/ui/badge";
 import type { StaticImageData } from "next/image";
 
@@ -32,9 +32,9 @@ export function PublicationCard({
       className="group relative bg-card rounded-2xl border border-border overflow-hidden hover:border-accent-gold/50 transition-colors"
     >
       {/* PDF Preview */}
-      <div className="aspect-[4/3] bg-muted relative overflow-hidden">
+      <div className="aspect-4/3 bg-muted relative overflow-hidden">
         <embed
-          src={typeof pdf === "string" ? pdf : pdf.src}
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH}/${typeof pdf === "string" ? pdf : pdf.src}`}
           type="application/pdf"
           className="w-full h-full"
         />
@@ -45,7 +45,7 @@ export function PublicationCard({
       <div className="p-6">
         <div className="flex items-center gap-2 mb-3">
           <Badge variant="secondary" className="flex items-center gap-1.5">
-            <Calendar className="size-3" />
+            <CalendarIcon className="size-3" />
             {date}
           </Badge>
           <Badge variant="outline">{venue}</Badge>
@@ -65,7 +65,7 @@ export function PublicationCard({
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 text-sm font-medium text-accent-gold hover:text-accent-copper transition-colors"
         >
-          <FilePdf className="size-4" />
+          <FilePdfIcon className="size-4" />
           View Paper
         </a>
       </div>
