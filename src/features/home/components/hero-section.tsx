@@ -1,5 +1,6 @@
 "use client";
 
+import { Suspense, lazy } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -8,11 +9,22 @@ import { personalInfo } from "@/lib/data/content";
 import { Button } from "@/components/ui/button";
 import { LaurelWreath } from "@/components/decorative/laurel-wreath";
 
+// Lazy load Three.js components for better performance
+const ThreeCanvas = lazy(() => import("@/components/three/three-canvas").then(mod => ({ default: mod.ThreeCanvas })));
+const ArtisticScene = lazy(() => import("@/components/three/artistic-scene").then(mod => ({ default: mod.ArtisticScene })));
+
 export function HeroSection() {
   return (
     <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+      {/* Three.js Artistic Background */}
+      <Suspense fallback={null}>
+        <ThreeCanvas className="opacity-40">
+          <ArtisticScene intensity="medium" />
+        </ThreeCanvas>
+      </Suspense>
+
       {/* Klimt "The Kiss" background with overlay */}
-      <div className="absolute inset-0 -z-10">
+      <div className="absolute inset-0 -z-20">
         <div className="absolute inset-0 opacity-[0.08]">
           <Image
             src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/images/kiss.jpg`}

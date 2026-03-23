@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { useState, useRef } from "react";
+import { motion, AnimatePresence, useMotionValue, useTransform, useAnimation } from "framer-motion";
 import {
   EnvelopeIcon,
   MapPinIcon,
@@ -16,6 +16,63 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
+// Paper plane SVG with fold animation
+function PaperPlane({ isAnimating }: { isAnimating: boolean }) {
+  return (
+    <motion.svg
+      width="120"
+      height="120"
+      viewBox="0 0 120 120"
+      className="text-accent-green"
+      initial={{ scale: 0.8 }}
+      animate={isAnimating ? {
+        scale: [0.8, 1.2, 0.5],
+        x: [0, 200, 400],
+        y: [0, -100, -200],
+        rotate: [0, 30, 60, 90],
+        opacity: [1, 1, 0]
+      } : { scale: 0.8 }}
+      transition={{ duration: 1.5, ease: "easeInOut" }}
+    >
+      <motion.path
+        d="M10 60 L60 30 L110 60 L60 90 Z"
+        fill="currentColor"
+        fillOpacity="0.2"
+        stroke="currentColor"
+        strokeWidth="2"
+        initial={{ pathLength: 0 }}
+        animate={{ pathLength: 1 }}
+        transition={{ duration: 0.5 }}
+      />
+      <motion.path
+        d="M60 30 L60 90"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeDasharray="4 2"
+      />
+      <motion.path
+        d="M30 60 L60 45 L90 60"
+        fill="currentColor"
+        fillOpacity="0.4"
+        stroke="currentColor"
+        strokeWidth="1"
+      />
+    </motion.svg>
+  );
+}
+
+// Animated trail particles
+function TrailParticle({ delay }: { delay: number }) {
+  return (
+    <motion.div
+      className="absolute w-2 h-2 rounded-full bg-accent-gold/30"
+      initial={{ scale: 0, opacity: 0 }}
+      animate={{ scale: [0, 1, 0], opacity: [0, 0.5, 0] }}
+      transition={{ duration: 1, delay, repeat: Infinity }}
+    />
+  );
+}
+
 export default function ContactPage() {
   const [formData, setFormData] = useState({
     name: "",
@@ -25,6 +82,7 @@ export default function ContactPage() {
   });
   const [isSent, setIsSent] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
+  const controls = useAnimation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,15 +91,28 @@ export default function ContactPage() {
     // Create mailto link
     const mailtoLink = `mailto:${personalInfo.email}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`)}`;
 
+    // Animate paper plane flying
+    controls.start({
+      x: [0, 50, 150, 300],
+      y: [0, -30, -60, -150],
+      rotate: [0, 15, 30, 45],
+      scale: [1, 1.1, 0.8, 0.5],
+      opacity: [1, 1, 1, 0],
+      transition: { duration: 1.5, ease: "easeOut" }
+    });
+
     // Open mailto
-    window.location.href = mailtoLink;
+    setTimeout(() => {
+      window.location.href = mailtoLink;
+    }, 500);
 
     // Show success animation
     setTimeout(() => {
       setIsAnimating(false);
       setIsSent(true);
+      controls.start({ x: 0, y: 0, rotate: 0, scale: 1, opacity: 1 });
       setTimeout(() => setIsSent(false), 3000);
-    }, 500);
+    }, 1500);
   };
 
   return (
@@ -59,34 +130,57 @@ export default function ContactPage() {
           className="inline-block mb-6"
         >
           <div className="relative w-24 h-24 mx-auto">
-            {/* Paper plane icon */}
+            {/* Paper plane with flight animation */}
             <motion.div
-              className="absolute inset-0 flex items-center justify-center text-accent-green"
-              animate={
-                isAnimating
-                  ? {
-                      x: [0, 100, 100],
-                      y: [0, -20, 50],
-                      rotate: [0, 45, 45],
-                      opacity: [1, 1, 0],
-                    }
-                  : {}
-              }
-              transition={{ duration: 1 }}
+              className="absolute inset-0 flex items-center justify-center"
+              animate={isAnimating ? {
+                x: [0, 100, 200],
+                y: [0, -50, -150],
+                rotate: [0, 45, 90],
+                scale: [1, 0.8, 0.5],
+                opacity: [1, 1, 0]
+              } : {}}
+              transition={{ duration: 1.5, ease: "easeOut" }}
             >
-              <PaperPlaneTiltIcon size={48} weight="fill" />
+              <motion.div
+                className="text-accent-green"
+                animate={isAnimating ? {} : {
+                  y: [0, -5, 0],
+                  rotate: [0, -2, 2, 0]
+                }}
+                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+              >
+                <PaperPlaneTiltIcon size={48} weight="fill" />
+              </motion.div>
+
+              {/* Trail particles during animation */}
+              {isAnimating && (
+                <>
+                  <TrailParticle delay={0} />
+                  <TrailParticle delay={0.2} />
+                  <TrailParticle delay={0.4} />
+                </>
+              )}
             </motion.div>
 
             {/* Success checkmark */}
             <AnimatePresence>
               {isSent && (
                 <motion.div
-                  initial={{ scale: 0 }}
-                  animate={{ scale: 1 }}
-                  exit={{ scale: 0 }}
-                  className="absolute inset-0 flex items-center justify-center text-accent-green"
+                  initial={{ scale: 0, rotate: -180 }}
+                  animate={{ scale: 1, rotate: 0 }}
+                  exit={{ scale: 0, rotate: 180 }}
+                  transition={{ duration: 0.5, ease: "easeOut" }}
+                  className="absolute inset-0 flex items-center justify-center"
                 >
-                  <CheckCircleIcon size={48} weight="fill" />
+                  <div className="relative">
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className="absolute inset-0 bg-accent-green/20 rounded-full"
+                    />
+                    <CheckCircleIcon size={48} weight="fill" className="text-accent-green relative z-10" />
+                  </div>
                 </motion.div>
               )}
             </AnimatePresence>

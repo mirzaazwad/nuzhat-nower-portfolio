@@ -7,22 +7,20 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### 1. Theme
 
 - Frida Kahlo Paintings: The image displays a depiction of the famous painting The Kiss (German: Der Kuss) by the Austrian Symbolist painter Gustav Klimt.
-- Use iconic British Museum relics in either animated or realistic versions
-- Give a good amount of focus in Greek Mythology, especially revolving around Aphrodite
-- Give a Harry Potter and Indiana Jones based theme
-- This is supposed to be a portfolio website
-- A blog section similar to this: https://www.moho.blog/poetries
+- Use iconic British Museum relics in either animated or realistic versions.
+- Give a good amount of focus in Greek Mythology, especially revolving around Aphrodite.
+- Give a Harry Potter and Indiana Jones based theme.
+- This is supposed to be a portfolio website.
 - Check the assets for information about the portfolio: /assets
-- Make a mobile-first UI
-- Use good animations and transitions using framer-motion
-- Make sure to actually use the Kiss by Gustav Klimt painting in your work
-- Make sure to properly set the profile image in the Hero page, which is the image of the person making the portfolio
-- Use aesthetic animations, that show transition
-- Use actual representations of Aphrodite the Greek Goddess and Frida Kahlo works
-- Focus on making a website that is interactive and properly conveys my skills
-- Use a greenish theme, that mixes properly with the gold accent currently
-- Also use Persephone in the Green theme
-- Use a paper plane based contact page that properly sends an email
+- Make a mobile-first UI.
+- Use good animations and transitions using framer-motion.
+- Keep a professional look with seemless interactions.
+- Make sure to actually use the Kiss by Gustav Klimt painting in your work.
+- Use aesthetic animations, that show transition, and smooth UI interactions.
+- Use 3D artistic animations, and graphics with three.js.
+- Use actual representations of Aphrodite the Greek Goddess and Frida Kahlo works.
+- Also use Persephone in the Green theme.
+- Use a paper plane based contact page that properly sends an email, this is implemented but the animation needs to work properly.
 
 ### 2. Plan Mode Default
 
