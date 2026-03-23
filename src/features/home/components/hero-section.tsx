@@ -15,7 +15,7 @@ export function HeroSection() {
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 opacity-[0.08]">
           <Image
-            src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/kiss.jpg`}
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/images/kiss.jpg`}
             alt="The Kiss by Gustav Klimt - decorative background"
             fill
             className="object-cover"
@@ -43,7 +43,7 @@ export function HeroSection() {
               {/* Profile image with Greek-style frame */}
               <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-accent-gold/50 shadow-2xl shadow-accent-green/20">
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/image.jpg`}
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/images/image.jpg`}
                   alt={personalInfo.name}
                   fill
                   className="object-cover"
@@ -56,7 +56,7 @@ export function HeroSection() {
               {/* Aphrodite-inspired corner decoration */}
               <div className="absolute -bottom-4 -right-4 w-24 h-24 opacity-60">
                 <Image
-                  src={`${process.env.NEXT_PUBLIC_BASE_PATH}/images/Mythlok-Aphrodite.jpg`}
+                  src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/images/Mythlok-Aphrodite.jpg`}
                   alt="Aphrodite decorative element"
                   fill
                   className="object-contain rounded-full"

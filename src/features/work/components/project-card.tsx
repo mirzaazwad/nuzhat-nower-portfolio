@@ -40,7 +40,7 @@ export function ProjectCard({
       >
         <div className="relative aspect-4/3 overflow-hidden rounded-xl bg-muted">
           <Image
-            src={`${process.env.NEXT_PUBLIC_BASE_PATH}${image}`}
+            src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}${image}`}
             alt={title}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"

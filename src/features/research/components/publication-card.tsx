@@ -34,7 +34,7 @@ export function PublicationCard({
       {/* PDF Preview */}
       <div className="aspect-4/3 bg-muted relative overflow-hidden">
         <embed
-          src={`${process.env.NEXT_PUBLIC_BASE_PATH}/${typeof pdf === "string" ? pdf : pdf.src}`}
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/${typeof pdf === "string" ? pdf : pdf.src}`}
           type="application/pdf"
           className="w-full h-full"
         />

@@ -5,7 +5,10 @@ const nextConfig: NextConfig = {
   reactCompiler: true,
   basePath: "/nuzhat-nower-portfolio",
   env: {
-    NEXT_PUBLIC_BASE_PATH: "/nuzhat-nower-portfolio",
+    NEXT_PUBLIC_BASE_PATH:
+      process.env.NEXT_PUBLIC_BASE_PATH === "/"
+        ? ""
+        : process.env.NEXT_PUBLIC_BASE_PATH,
   },
   output: "export",
   reactStrictMode: false,
