@@ -19,16 +19,15 @@ const ScrollIndicator = () => {
         return;
       }
 
-      const isAtBottom =
-        windowHeight + window.scrollY >= documentHeight - 50;
-      
+      const isAtBottom = windowHeight + window.scrollY >= documentHeight - 50;
+
       setIsVisible(!isAtBottom);
     };
 
     window.addEventListener("scroll", checkScroll, { passive: true });
     window.addEventListener("resize", checkScroll, { passive: true });
     checkScroll();
-    
+
     // Check again after a small delay to handle content rendering/images
     const timeout1 = setTimeout(checkScroll, 100);
     const timeout2 = setTimeout(checkScroll, 500);
@@ -49,7 +48,7 @@ const ScrollIndicator = () => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.6 }}
-          className="fixed bottom-8 left-1/2 -translate-x-1/2 hidden lg:block z-50"
+          className="fixed bottom-8 left-1/2 -translate-x-1/2 z-50"
         >
           <motion.div
             animate={{ y: [0, 8, 0] }}
