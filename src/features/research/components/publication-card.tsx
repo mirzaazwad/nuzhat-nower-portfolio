@@ -3,7 +3,10 @@
 import { motion } from "framer-motion";
 import { FilePdfIcon, CalendarIcon } from "@phosphor-icons/react";
 import { Badge } from "@/components/ui/badge";
+import { Document, Page, pdfjs } from "react-pdf";
 import type { StaticImageData } from "next/image";
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 interface PublicationCardProps {
   id: string;
@@ -31,14 +34,23 @@ export function PublicationCard({
       transition={{ duration: 0.5, delay: index * 0.1 }}
       className="group relative bg-card rounded-2xl border border-border overflow-hidden hover:border-secondary-gold/50 transition-colors"
     >
-      {/* PDF Preview */}
-      <div className="aspect-4/3 bg-muted relative overflow-hidden">
-        <embed
-          src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/${typeof pdf === "string" ? pdf : pdf.src}`}
-          type="application/pdf"
-          className="w-full h-full"
-        />
-        <div className="absolute inset-0 bg-card/60" />
+      {/* PDF Preview Snapshot */}
+      <div className="aspect-4/3 bg-muted relative overflow-hidden flex items-start justify-center pt-8">
+        <div className="w-[85%] origin-top hover:scale-[1.02] transition-transform duration-500 ease-out shadow-lg opacity-80 group-hover:opacity-100">
+          <Document
+            file={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/${typeof pdf === "string" ? pdf : pdf.src}`}
+            loading={<div className="w-full aspect-[1/1.4] animate-pulse bg-muted-foreground/10 rounded-sm" />}
+          >
+            <Page
+              pageNumber={1}
+              renderTextLayer={false}
+              renderAnnotationLayer={false}
+              width={350}
+              className="rounded-sm overflow-hidden border border-border/50"
+            />
+          </Document>
+        </div>
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-card to-transparent pointer-events-none" />
       </div>
 
       {/* Content */}
