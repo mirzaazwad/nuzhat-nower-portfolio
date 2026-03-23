@@ -23,10 +23,10 @@ export function ExperienceCard({ type }: ExperienceCardProps) {
       className="bg-card rounded-2xl border border-border p-6 md:p-8"
     >
       <div className="flex items-center gap-3 mb-6">
-        <div className="p-2.5 rounded-xl bg-linear-to-br from-accent-green/20 to-accent-gold/20">
-          <Icon className="size-6 text-accent-green" weight="duotone" />
+        <div className="p-2.5 rounded-xl bg-primary-green/10 border border-primary-green/30">
+          <Icon className="size-6 text-secondary-gold" weight="duotone" />
         </div>
-        <h2 className="text-2xl font-bold">{title}</h2>
+        <h2 className="text-2xl font-bold text-secondary-gold">{title}</h2>
       </div>
 
       <div className="space-y-0">

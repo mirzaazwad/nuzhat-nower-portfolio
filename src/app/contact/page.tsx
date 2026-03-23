@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { motion, AnimatePresence, useMotionValue, useTransform, useAnimation } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   EnvelopeIcon,
   MapPinIcon,
@@ -16,56 +16,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
-// Paper plane SVG with fold animation
-function PaperPlane({ isAnimating }: { isAnimating: boolean }) {
-  return (
-    <motion.svg
-      width="120"
-      height="120"
-      viewBox="0 0 120 120"
-      className="text-accent-green"
-      initial={{ scale: 0.8 }}
-      animate={isAnimating ? {
-        scale: [0.8, 1.2, 0.5],
-        x: [0, 200, 400],
-        y: [0, -100, -200],
-        rotate: [0, 30, 60, 90],
-        opacity: [1, 1, 0]
-      } : { scale: 0.8 }}
-      transition={{ duration: 1.5, ease: "easeInOut" }}
-    >
-      <motion.path
-        d="M10 60 L60 30 L110 60 L60 90 Z"
-        fill="currentColor"
-        fillOpacity="0.2"
-        stroke="currentColor"
-        strokeWidth="2"
-        initial={{ pathLength: 0 }}
-        animate={{ pathLength: 1 }}
-        transition={{ duration: 0.5 }}
-      />
-      <motion.path
-        d="M60 30 L60 90"
-        stroke="currentColor"
-        strokeWidth="2"
-        strokeDasharray="4 2"
-      />
-      <motion.path
-        d="M30 60 L60 45 L90 60"
-        fill="currentColor"
-        fillOpacity="0.4"
-        stroke="currentColor"
-        strokeWidth="1"
-      />
-    </motion.svg>
-  );
-}
-
-// Animated trail particles
+// Trail particles for animation
 function TrailParticle({ delay }: { delay: number }) {
   return (
     <motion.div
-      className="absolute w-2 h-2 rounded-full bg-accent-gold/30"
+      className="absolute w-2 h-2 rounded-full bg-secondary-gold/30"
       initial={{ scale: 0, opacity: 0 }}
       animate={{ scale: [0, 1, 0], opacity: [0, 0.5, 0] }}
       transition={{ duration: 1, delay, repeat: Infinity }}
@@ -82,7 +37,6 @@ export default function ContactPage() {
   });
   const [isSent, setIsSent] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
-  const controls = useAnimation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,16 +46,6 @@ export default function ContactPage() {
     const mailtoLink = `mailto:${personalInfo.email}?subject=${encodeURIComponent(formData.subject)}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\n${formData.message}`)}`;
 
     // Animate paper plane flying
-    controls.start({
-      x: [0, 50, 150, 300],
-      y: [0, -30, -60, -150],
-      rotate: [0, 15, 30, 45],
-      scale: [1, 1.1, 0.8, 0.5],
-      opacity: [1, 1, 1, 0],
-      transition: { duration: 1.5, ease: "easeOut" }
-    });
-
-    // Open mailto
     setTimeout(() => {
       window.location.href = mailtoLink;
     }, 500);
@@ -110,13 +54,12 @@ export default function ContactPage() {
     setTimeout(() => {
       setIsAnimating(false);
       setIsSent(true);
-      controls.start({ x: 0, y: 0, rotate: 0, scale: 1, opacity: 1 });
       setTimeout(() => setIsSent(false), 3000);
     }, 1500);
   };
 
   return (
-    <div className="container mx-auto px-4 py-16 md:py-24">
+    <div className="container mx-auto px-4 py-16 md:py-24 bg-background">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -143,7 +86,7 @@ export default function ContactPage() {
               transition={{ duration: 1.5, ease: "easeOut" }}
             >
               <motion.div
-                className="text-accent-green"
+                className="text-secondary-gold"
                 animate={isAnimating ? {} : {
                   y: [0, -5, 0],
                   rotate: [0, -2, 2, 0]
@@ -177,9 +120,9 @@ export default function ContactPage() {
                     <motion.div
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      className="absolute inset-0 bg-accent-green/20 rounded-full"
+                      className="absolute inset-0 bg-secondary-gold/20 rounded-full"
                     />
-                    <CheckCircleIcon size={48} weight="fill" className="text-accent-green relative z-10" />
+                    <CheckCircleIcon size={48} weight="fill" className="text-secondary-gold relative z-10" />
                   </div>
                 </motion.div>
               )}
@@ -187,11 +130,11 @@ export default function ContactPage() {
           </div>
         </motion.div>
 
-        <span className="inline-block text-sm font-medium tracking-wider uppercase text-accent-green mb-4">
+        <span className="inline-block px-3 py-1 rounded-md text-sm font-medium tracking-wider uppercase text-primary-green-light bg-secondary-gold/10 border border-secondary-gold/30 mb-4">
           Contact
         </span>
-        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight">
-          <span className="bg-linear-to-r from-accent-green via-accent-gold to-accent-copper bg-clip-text text-transparent">
+        <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground">
+          <span className="text-secondary-gold">
             Send a Message
           </span>
         </h1>
@@ -201,7 +144,7 @@ export default function ContactPage() {
       </motion.div>
 
       <div className="grid gap-12 lg:grid-cols-2 max-w-5xl mx-auto">
-        {/* Contact Form - Paper Plane Design */}
+        {/* Contact Form */}
         <motion.div
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -209,18 +152,13 @@ export default function ContactPage() {
           className="relative"
         >
           <div className="bg-card rounded-2xl border border-border p-6 md:p-8 relative overflow-hidden">
-            {/* Paper texture overlay */}
-            <div className="absolute inset-0 opacity-5">
-              <div className="w-full h-full bg-[linear-gradient(90deg,transparent_50%,rgba(0,0,0,0.02)_50%)] bg-size-[8px_8px]" />
-            </div>
-
             {/* Folded corner effect */}
-            <div className="absolute top-0 right-0 w-16 h-16 bg-linear-to-br from-accent-warm to-accent-gold/30 clip-path-triangle" />
+            <div className="absolute top-0 right-0 w-16 h-16 bg-secondary-gold/20" style={{ clipPath: "polygon(100% 0, 100% 100%, 0 0)" }} />
 
             <form onSubmit={handleSubmit} className="space-y-6 relative">
               <div className="grid gap-6 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium">
+                  <label htmlFor="name" className="text-sm font-medium text-foreground">
                     Name
                   </label>
                   <Input
@@ -231,11 +169,11 @@ export default function ContactPage() {
                       setFormData({ ...formData, name: e.target.value })
                     }
                     required
-                    className="bg-background/50 border-accent-gold/20 focus:border-accent-green"
+                    className="bg-background/50 border-border focus:border-secondary-gold focus:ring-secondary-gold text-foreground placeholder:text-muted-foreground"
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium">
+                  <label htmlFor="email" className="text-sm font-medium text-foreground">
                     Email
                   </label>
                   <Input
@@ -247,12 +185,12 @@ export default function ContactPage() {
                       setFormData({ ...formData, email: e.target.value })
                     }
                     required
-                    className="bg-background/50 border-accent-gold/20 focus:border-accent-green"
+                    className="bg-background/50 border-border focus:border-secondary-gold focus:ring-secondary-gold text-foreground placeholder:text-muted-foreground"
                   />
                 </div>
               </div>
               <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm font-medium">
+                <label htmlFor="subject" className="text-sm font-medium text-foreground">
                   Subject
                 </label>
                 <Input
@@ -263,11 +201,11 @@ export default function ContactPage() {
                     setFormData({ ...formData, subject: e.target.value })
                   }
                   required
-                  className="bg-background/50 border-accent-gold/20 focus:border-accent-green"
+                  className="bg-background/50 border-border focus:border-secondary-gold focus:ring-secondary-gold text-foreground placeholder:text-muted-foreground"
                 />
               </div>
               <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium">
+                <label htmlFor="message" className="text-sm font-medium text-foreground">
                   Message
                 </label>
                 <Textarea
@@ -279,13 +217,13 @@ export default function ContactPage() {
                     setFormData({ ...formData, message: e.target.value })
                   }
                   required
-                  className="bg-background/50 border-accent-gold/20 focus:border-accent-green resize-none"
+                  className="bg-background/50 border-border focus:border-secondary-gold focus:ring-secondary-gold resize-none text-foreground placeholder:text-muted-foreground"
                 />
               </div>
               <Button
                 type="submit"
                 size="lg"
-                className="w-full sm:w-auto bg-accent-green hover:bg-accent-emerald group"
+                className="w-full sm:w-auto bg-secondary-gold text-primary-green-dark hover:bg-secondary-gold-light font-semibold rounded-lg"
                 disabled={isAnimating}
               >
                 <PaperPlaneTiltIcon className="mr-2 size-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -303,42 +241,42 @@ export default function ContactPage() {
           className="space-y-8"
         >
           <div className="bg-card rounded-2xl border border-border p-6 md:p-8 space-y-6">
-            <h2 className="text-xl font-bold">Contact Information</h2>
+            <h2 className="text-xl font-bold text-secondary-gold">Contact Information</h2>
 
             <div className="space-y-4">
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="flex items-center gap-4 p-3 rounded-lg hover:bg-accent-green/10 transition-colors group"
+                className="flex items-center gap-4 p-3 rounded-lg border border-transparent hover:border-secondary-gold hover:bg-secondary-gold/5 transition-colors group"
               >
-                <div className="p-2 rounded-lg bg-accent-green/10 group-hover:bg-accent-green/20 transition-colors">
-                  <EnvelopeIcon className="size-5 text-accent-green" />
+                <div className="p-2 rounded-lg bg-secondary-gold/10 group-hover:bg-secondary-gold/20 transition-colors">
+                  <EnvelopeIcon className="size-5 text-secondary-gold" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Email</p>
-                  <p className="font-medium">{personalInfo.email}</p>
+                  <p className="font-medium text-foreground">{personalInfo.email}</p>
                 </div>
               </a>
 
               <a
                 href={`tel:${personalInfo.phone}`}
-                className="flex items-center gap-4 p-3 rounded-lg hover:bg-accent-gold/10 transition-colors group"
+                className="flex items-center gap-4 p-3 rounded-lg border border-transparent hover:border-primary-green hover:bg-primary-green/5 transition-colors group"
               >
-                <div className="p-2 rounded-lg bg-accent-gold/10 group-hover:bg-accent-gold/20 transition-colors">
-                  <PhoneIcon className="size-5 text-accent-gold" />
+                <div className="p-2 rounded-lg bg-primary-green/10 group-hover:bg-primary-green/20 transition-colors">
+                  <PhoneIcon className="size-5 text-primary-green-light" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Phone</p>
-                  <p className="font-medium">{personalInfo.phone}</p>
+                  <p className="font-medium text-foreground">{personalInfo.phone}</p>
                 </div>
               </a>
 
-              <div className="flex items-center gap-4 p-3 rounded-lg">
-                <div className="p-2 rounded-lg bg-accent-copper/10">
-                  <MapPinIcon className="size-5 text-accent-copper" />
+              <div className="flex items-center gap-4 p-3 rounded-lg border border-transparent">
+                <div className="p-2 rounded-lg bg-secondary-gold-dark/10">
+                  <MapPinIcon className="size-5 text-secondary-gold-dark" />
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Location</p>
-                  <p className="font-medium">{personalInfo.location}</p>
+                  <p className="font-medium text-foreground">{personalInfo.location}</p>
                 </div>
               </div>
             </div>
@@ -346,13 +284,13 @@ export default function ContactPage() {
 
           {/* Social Links */}
           <div className="bg-card rounded-2xl border border-border p-6 md:p-8">
-            <h2 className="text-xl font-bold mb-4">Connect With Me</h2>
+            <h2 className="text-xl font-bold mb-4 text-secondary-gold">Connect With Me</h2>
             <div className="flex gap-4">
               <a
                 href={personalInfo.socialLinks.linkedin}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 rounded-lg bg-accent-warm/50 hover:bg-accent-green/20 hover:text-accent-green transition-all"
+                className="p-3 rounded-lg border border-border hover:border-secondary-gold hover:bg-secondary-gold/10 hover:text-secondary-gold transition-colors"
               >
                 <LinkedinLogoIcon className="size-5" />
                 <span className="sr-only">LinkedIn</span>
@@ -361,14 +299,14 @@ export default function ContactPage() {
                 href={personalInfo.socialLinks.github}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-3 rounded-lg bg-accent-warm/50 hover:bg-accent-gold/20 hover:text-accent-gold transition-all"
+                className="p-3 rounded-lg border border-border hover:border-secondary-gold hover:bg-secondary-gold/10 hover:text-secondary-gold transition-colors"
               >
                 <GithubLogoIcon className="size-5" />
                 <span className="sr-only">GitHub</span>
               </a>
               <a
                 href={`mailto:${personalInfo.email}`}
-                className="p-3 rounded-lg bg-accent-warm/50 hover:bg-accent-copper/20 hover:text-accent-copper transition-all"
+                className="p-3 rounded-lg border border-border hover:border-secondary-gold hover:bg-secondary-gold/10 hover:text-secondary-gold transition-colors"
               >
                 <EnvelopeIcon className="size-5" />
                 <span className="sr-only">Email</span>

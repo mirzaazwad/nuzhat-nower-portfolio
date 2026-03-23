@@ -38,23 +38,23 @@ export function ProjectCard({
         target={link.startsWith("http") ? "_blank" : undefined}
         rel={link.startsWith("http") ? "noopener noreferrer" : undefined}
       >
-        <div className="relative aspect-4/3 overflow-hidden rounded-xl bg-muted">
+        <div className="relative aspect-4/3 overflow-hidden rounded-xl bg-muted border border-border">
           <Image
             src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}${image}`}
             alt={title}
             fill
             className="object-cover transition-transform duration-500 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-linear-to-t from-background/90 via-background/20 to-transparent opacity-60 group-hover:opacity-80 transition-opacity" />
+          <div className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity" />
           <div className="absolute top-4 right-4 opacity-0 group-hover:opacity-100 transition-opacity">
-            <div className="p-2 rounded-full bg-accent-gold/90 text-background">
+            <div className="p-2 rounded-lg bg-secondary-gold text-primary-green-dark">
               <ArrowUpRightIcon className="size-4" />
             </div>
           </div>
         </div>
 
         <div className="mt-4 space-y-3">
-          <h3 className="text-xl font-semibold tracking-tight group-hover:text-accent-gold transition-colors">
+          <h3 className="text-xl font-semibold tracking-tight text-foreground group-hover:text-secondary-gold transition-colors">
             {title}
           </h3>
           <p className="text-muted-foreground line-clamp-2 text-sm">
@@ -62,7 +62,7 @@ export function ProjectCard({
           </p>
           <div className="flex flex-wrap gap-2">
             {tags.map((tag) => (
-              <Badge key={tag} variant="secondary" className="text-xs">
+              <Badge key={tag} variant="secondary" className="text-xs bg-primary-green/10 border border-primary-green/30 text-foreground hover:bg-secondary-gold/10">
                 {tag}
               </Badge>
             ))}

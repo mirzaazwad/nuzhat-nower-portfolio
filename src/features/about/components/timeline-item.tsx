@@ -33,19 +33,19 @@ export function TimelineItem({
     >
       {/* Timeline line */}
       <div className="flex flex-col items-center">
-        <div className="w-10 h-10 rounded-full bg-linear-to-br from-accent-gold to-accent-copper flex items-center justify-center text-background shrink-0">
-          {icon || <div className="w-3 h-3 rounded-full bg-background" />}
+        <div className="w-10 h-10 rounded-full bg-secondary-gold flex items-center justify-center text-primary-green-dark shrink-0">
+          {icon || <div className="w-3 h-3 rounded-full bg-primary-green" />}
         </div>
         {!isLast && (
-          <div className="flex-1 w-0.5 bg-linear-to-b from-accent-gold/50 to-transparent" />
+          <div className="flex-1 w-0.5 bg-secondary-gold/30" />
         )}
       </div>
 
       {/* Content */}
       <div className={cn("pb-8", isLast && "pb-0")}>
-        <span className="text-sm text-accent-copper font-medium">{period}</span>
-        <h3 className="text-lg font-semibold mt-1">{title}</h3>
-        <p className="text-accent-gold font-medium">{subtitle}</p>
+        <span className="text-sm text-secondary-gold-dark font-medium">{period}</span>
+        <h3 className="text-lg font-semibold mt-1 text-foreground">{title}</h3>
+        <p className="text-secondary-gold font-medium">{subtitle}</p>
         {description && (
           <p className="text-muted-foreground mt-2 text-sm">{description}</p>
         )}

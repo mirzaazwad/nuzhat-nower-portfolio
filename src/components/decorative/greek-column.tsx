@@ -19,16 +19,16 @@ const heightVariants = {
 
 const colorVariants = {
   gold: {
-    stroke: "var(--accent-gold)",
-    fill: "var(--accent-gold)",
+    stroke: "var(--secondary-gold)",
+    fill: "var(--secondary-gold)",
   },
   green: {
-    stroke: "var(--accent-green)",
-    fill: "var(--accent-green)",
+    stroke: "var(--primary-green-light)",
+    fill: "var(--primary-green)",
   },
   copper: {
-    stroke: "var(--accent-copper)",
-    fill: "var(--accent-copper)",
+    stroke: "var(--secondary-gold-dark)",
+    fill: "var(--secondary-gold-dark)",
   },
 };
 

@@ -4,8 +4,8 @@ import { useRef, useMemo } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
-// Klimt-inspired gold floating particles
-function GoldParticles({ count = 100 }) {
+// Green particles (Slytherin-inspired)
+function GreenParticles({ count = 100 }) {
   const mesh = useRef<THREE.InstancedMesh>(null);
 
   const particles = useMemo(() => {
@@ -53,7 +53,7 @@ function GoldParticles({ count = 100 }) {
     <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
       <circleGeometry args={[1, 32]} />
       <meshBasicMaterial
-        color="#d4af37"
+        color="#1a5d4a"
         transparent
         opacity={0.4}
         depthWrite={false}
@@ -62,11 +62,11 @@ function GoldParticles({ count = 100 }) {
   );
 }
 
-// Persephone-inspired floating leaves/petals
-function FloatingPetals({ count = 50 }) {
+// Gold particles (Hufflepuff-inspired)
+function GoldParticles({ count = 80 }) {
   const mesh = useRef<THREE.InstancedMesh>(null);
 
-  const petals = useMemo(() => {
+  const particles = useMemo(() => {
     const temp = [];
     for (let i = 0; i < count; i++) {
       temp.push({
@@ -89,12 +89,12 @@ function FloatingPetals({ count = 50 }) {
   useFrame((state) => {
     if (!mesh.current) return;
 
-    petals.forEach((petal, i) => {
+    particles.forEach((petal, i) => {
       const time = state.clock.elapsedTime;
 
       dummy.position.set(
         petal.position[0] + Math.sin(time * petal.speed + petal.phase) * 0.8,
-        petal.position[1] + Math.cos(time * petal.speed * 0.7 + petal.phase) * 0.5 - time * 0.05 % 10,
+        petal.position[1] + Math.cos(time * petal.speed * 0.7 + petal.phase) * 0.5 - (time * 0.05) % 10,
         petal.position[2] + Math.sin(time * petal.speed * 0.3) * 0.3
       );
 
@@ -112,7 +112,7 @@ function FloatingPetals({ count = 50 }) {
     <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
       <coneGeometry args={[0.5, 1, 4]} />
       <meshBasicMaterial
-        color="#2d8b53"
+        color="#e0f780"
         transparent
         opacity={0.3}
         depthWrite={false}
@@ -121,11 +121,11 @@ function FloatingPetals({ count = 50 }) {
   );
 }
 
-// Aphrodite-inspired floating shells/hearts
-function FloatingHearts({ count = 30 }) {
+// Persephone-inspired floating flowers
+function FloatingFlowers({ count = 30 }) {
   const mesh = useRef<THREE.InstancedMesh>(null);
 
-  const hearts = useMemo(() => {
+  const flowers = useMemo(() => {
     const temp = [];
     for (let i = 0; i < count; i++) {
       temp.push({
@@ -143,7 +143,7 @@ function FloatingHearts({ count = 30 }) {
   }, [count]);
 
   const dummy = useMemo(() => new THREE.Object3D(), []);
-  const heartShape = useMemo(() => {
+  const flowerShape = useMemo(() => {
     const shape = new THREE.Shape();
     const x = 0, y = 0;
     shape.moveTo(x, y + 0.5);
@@ -155,17 +155,17 @@ function FloatingHearts({ count = 30 }) {
   useFrame((state) => {
     if (!mesh.current) return;
 
-    hearts.forEach((heart, i) => {
+    flowers.forEach((flower, i) => {
       const time = state.clock.elapsedTime;
 
       dummy.position.set(
-        heart.position[0] + Math.sin(time * heart.speed + heart.phase) * 1,
-        heart.position[1] + Math.cos(time * heart.speed * 0.8 + heart.phase) * 0.6,
-        heart.position[2]
+        flower.position[0] + Math.sin(time * flower.speed + flower.phase) * 1,
+        flower.position[1] + Math.cos(time * flower.speed * 0.8 + flower.phase) * 0.6,
+        flower.position[2]
       );
 
-      dummy.rotation.z = time * heart.speed * 0.2;
-      dummy.scale.setScalar(heart.scale);
+      dummy.rotation.z = time * flower.speed * 0.2;
+      dummy.scale.setScalar(flower.scale);
       dummy.updateMatrix();
       mesh.current!.setMatrixAt(i, dummy.matrix);
     });
@@ -175,9 +175,9 @@ function FloatingHearts({ count = 30 }) {
 
   return (
     <instancedMesh ref={mesh} args={[undefined, undefined, count]}>
-      <shapeGeometry args={[heartShape]} />
+      <shapeGeometry args={[flowerShape]} />
       <meshBasicMaterial
-        color="#d4af37"
+        color="#2d8b53"
         transparent
         opacity={0.35}
         depthWrite={false}
@@ -189,16 +189,16 @@ function FloatingHearts({ count = 30 }) {
 
 // Main artistic scene combining all elements
 export function ArtisticScene({ intensity = "medium" as "low" | "medium" | "high" }) {
-  const particleCount = intensity === "low" ? 50 : intensity === "medium" ? 100 : 150;
-  const petalCount = intensity === "low" ? 25 : intensity === "medium" ? 50 : 80;
-  const heartCount = intensity === "low" ? 15 : intensity === "medium" ? 30 : 50;
+  const greenCount = intensity === "low" ? 50 : intensity === "medium" ? 100 : 150;
+  const goldCount = intensity === "low" ? 25 : intensity === "medium" ? 50 : 80;
+  const flowerCount = intensity === "low" ? 15 : intensity === "medium" ? 30 : 50;
 
   return (
     <>
       <ambientLight intensity={0.5} />
-      <GoldParticles count={particleCount} />
-      <FloatingPetals count={petalCount} />
-      <FloatingHearts count={heartCount} />
+      <GreenParticles count={greenCount} />
+      <GoldParticles count={goldCount} />
+      <FloatingFlowers count={flowerCount} />
     </>
   );
 }

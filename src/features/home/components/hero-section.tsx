@@ -15,26 +15,23 @@ const ArtisticScene = lazy(() => import("@/components/three/artistic-scene").the
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[85vh] flex items-center overflow-hidden">
+    <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-background">
       {/* Three.js Artistic Background */}
       <Suspense fallback={null}>
-        <ThreeCanvas className="opacity-40">
-          <ArtisticScene intensity="medium" />
+        <ThreeCanvas className="opacity-30">
+          <ArtisticScene intensity="low" />
         </ThreeCanvas>
       </Suspense>
 
       {/* Klimt "The Kiss" background with overlay */}
-      <div className="absolute inset-0 -z-20">
-        <div className="absolute inset-0 opacity-[0.08]">
-          <Image
-            src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/images/kiss.jpg`}
-            alt="The Kiss by Gustav Klimt - decorative background"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-        <div className="absolute inset-0 bg-linear-to-r from-background via-background/95 to-background/80" />
+      <div className="absolute inset-0 -z-20 opacity-[0.05]">
+        <Image
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/images/kiss.jpg`}
+          alt="The Kiss by Gustav Klimt - decorative background"
+          fill
+          className="object-cover"
+          priority
+        />
       </div>
 
       <div className="container mx-auto px-4 py-16 md:py-24">
@@ -47,13 +44,13 @@ export function HeroSection() {
             className="relative flex justify-center lg:order-2"
           >
             <div className="relative">
-              {/* Laurel wreath decoration */}
+              {/* Laurel wreath decoration - Greek victory symbol */}
               <div className="absolute -top-8 left-1/2 -translate-x-1/2">
                 <LaurelWreath size="lg" color="gold" />
               </div>
 
-              {/* Profile image with Greek-style frame */}
-              <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-accent-gold/50 shadow-2xl shadow-accent-green/20">
+              {/* Profile image with clean frame */}
+              <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-secondary-gold">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/images/image.jpg`}
                   alt={personalInfo.name}
@@ -61,17 +58,15 @@ export function HeroSection() {
                   className="object-cover"
                   priority
                 />
-                {/* Decorative overlay inspired by Klimt */}
-                <div className="absolute inset-0 bg-linear-to-t from-accent-gold/20 via-transparent to-transparent" />
               </div>
 
               {/* Aphrodite-inspired corner decoration */}
-              <div className="absolute -bottom-4 -right-4 w-24 h-24 opacity-60">
+              <div className="absolute -bottom-4 -right-4 w-24 h-24 rounded-full border-2 border-primary-green overflow-hidden">
                 <Image
                   src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/images/Mythlok-Aphrodite.jpg`}
                   alt="Aphrodite decorative element"
                   fill
-                  className="object-contain rounded-full"
+                  className="object-cover"
                 />
               </div>
             </div>
@@ -84,7 +79,7 @@ export function HeroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
             >
-              <span className="inline-block text-sm font-medium tracking-wider uppercase text-accent-green mb-4">
+              <span className="inline-block px-3 py-1 rounded-md text-sm font-medium tracking-wider uppercase text-primary-green-light bg-secondary-gold/10 border border-secondary-gold/30">
                 {personalInfo.title} • {personalInfo.location}
               </span>
             </motion.div>
@@ -93,10 +88,10 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6, delay: 0.1 }}
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight"
+              className="mt-4 text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold tracking-tight leading-tight text-foreground"
             >
               <span className="block">Hello, I&apos;m</span>
-              <span className="block mt-2 bg-linear-to-r from-accent-green via-accent-gold to-accent-copper bg-clip-text text-transparent">
+              <span className="block mt-2 text-secondary-gold">
                 {personalInfo.name}
               </span>
             </motion.h1>
@@ -118,11 +113,11 @@ export function HeroSection() {
             >
               <Button
                 size="lg"
-                className="group rounded-lg bg-accent-green hover:bg-accent-emerald"
+                className="rounded-lg bg-secondary-gold text-primary-green-dark hover:bg-secondary-gold-light font-semibold"
               >
                 <Link href="/work">
-                  <div className="flex">
-                    Explore My Work{" "}
+                  <div className="flex items-center">
+                    Explore My Work
                     <ArrowRightIcon className="ml-2 size-4 transition-transform group-hover:translate-x-1" />
                   </div>
                 </Link>
@@ -136,13 +131,13 @@ export function HeroSection() {
               transition={{ duration: 0.6, delay: 0.5 }}
               className="mt-12 flex items-center gap-6"
             >
-              <div className="h-px flex-1 bg-linear-to-r from-accent-green/50 to-transparent max-w-32" />
+              <div className="h-px flex-1 bg-border max-w-32" />
               <div className="flex items-center gap-4">
                 <a
                   href={personalInfo.socialLinks.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-accent-green transition-colors"
+                  className="p-2 rounded-lg bg-card border border-border text-muted-foreground hover:text-secondary-gold hover:border-secondary-gold transition-colors"
                 >
                   <svg
                     className="w-5 h-5"
@@ -158,7 +153,7 @@ export function HeroSection() {
                   href={personalInfo.socialLinks.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-muted-foreground hover:text-accent-gold transition-colors"
+                  className="p-2 rounded-lg bg-card border border-border text-muted-foreground hover:text-secondary-gold hover:border-secondary-gold transition-colors"
                 >
                   <svg
                     className="w-5 h-5"
@@ -175,7 +170,7 @@ export function HeroSection() {
                   <span className="sr-only">GitHub</span>
                 </a>
               </div>
-              <div className="h-px flex-1 bg-linear-to-l from-accent-gold/50 to-transparent max-w-32" />
+              <div className="h-px flex-1 bg-border max-w-32" />
             </motion.div>
           </div>
         </div>
@@ -191,9 +186,9 @@ export function HeroSection() {
         <motion.div
           animate={{ y: [0, 8, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="w-6 h-10 rounded-full border-2 border-accent-green/30 flex items-start justify-center p-1"
+          className="w-6 h-10 rounded-full border-2 border-secondary-gold/30 flex items-start justify-center p-1"
         >
-          <div className="w-1.5 h-2.5 rounded-full bg-accent-green/60" />
+          <div className="w-1.5 h-2.5 rounded-full bg-secondary-gold/60" />
         </motion.div>
       </motion.div>
     </section>

@@ -46,102 +46,109 @@
   --radius-2xl: calc(var(--radius) * 1.8);
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
-  /* Warm artistic theme colors */
-  --color-accent-gold: var(--accent-gold);
-  --color-accent-copper: var(--accent-copper);
-  --color-accent-warm: var(--accent-warm);
-  /* Greek mythology green theme colors (Persephone) */
-  --color-accent-green: var(--accent-green);
-  --color-accent-green-light: var(--accent-green-light);
-  --color-accent-emerald: var(--accent-emerald);
-  --color-accent-mint: var(--accent-mint);
+  /* Primary: Green (Slytherin-inspired) */
+  --color-primary-green: var(--primary-green);
+  --color-primary-green-dark: var(--primary-green-dark);
+  --color-primary-green-light: var(--primary-green-light);
+  /* Secondary: Gold/Yellow (Hufflepuff-inspired) */
+  --color-secondary-gold: var(--secondary-gold);
+  --color-secondary-gold-dark: var(--secondary-gold-dark);
+  --color-secondary-gold-light: var(--secondary-gold-light);
+  /* Greek theme accent */
+  --color-greek-marble: var(--greek-marble);
+  --color-greek-olive: var(--greek-olive);
 }
 
 :root {
-  --background: oklch(0.99 0.005 85);
-  --foreground: oklch(0.2 0.02 60);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.2 0.02 60);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.2 0.02 60);
-  --primary: oklch(0.45 0.12 55);
-  --primary-foreground: oklch(0.99 0.005 85);
-  --secondary: oklch(0.96 0.02 75);
-  --secondary-foreground: oklch(0.3 0.05 55);
-  --muted: oklch(0.96 0.02 75);
-  --muted-foreground: oklch(0.5 0.03 60);
-  --accent: oklch(0.92 0.04 80);
-  --accent-foreground: oklch(0.3 0.05 55);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.9 0.03 75);
-  --input: oklch(0.92 0.03 75);
-  --ring: oklch(0.7 0.12 55);
-  --chart-1: oklch(0.75 0.12 55);
-  --chart-2: oklch(0.65 0.15 50);
-  --chart-3: oklch(0.55 0.18 45);
-  --chart-4: oklch(0.45 0.15 55);
-  --chart-5: oklch(0.35 0.12 50);
+  /* Background: Deep dark green */
+  --background: #022a30;
+  --foreground: #b6cbce;
+  /* Cards: Dark green */
+  --card: #033f47;
+  --card-foreground: #eef3db;
+  --popover: #033f47;
+  --popover-foreground: #eef3db;
+  /* Primary: Green */
+  --primary: #1a5d4a;
+  --primary-foreground: #eef3db;
+  /* Secondary: Gold (Hufflepuff) */
+  --secondary: #e0f780;
+  --secondary-foreground: #033f47;
+  --muted: #054952;
+  --muted-foreground: #8ab4b8;
+  --accent: #e0f780;
+  --accent-foreground: #033f47;
+  --destructive: #dc2626;
+  --border: #054952;
+  --input: #054952;
+  --ring: #e0f780;
+  --chart-1: #e0f780;
+  --chart-2: #1a5d4a;
+  --chart-3: #deff58;
+  --chart-4: #033f47;
+  --chart-5: #2d8b53;
   --radius: 0.625rem;
-  --sidebar: oklch(0.98 0.005 80);
-  --sidebar-foreground: oklch(0.2 0.02 60);
-  --sidebar-primary: oklch(0.45 0.12 55);
-  --sidebar-primary-foreground: oklch(0.99 0.005 85);
-  --sidebar-accent: oklch(0.92 0.04 80);
-  --sidebar-accent-foreground: oklch(0.3 0.05 55);
-  --sidebar-border: oklch(0.9 0.03 75);
-  --sidebar-ring: oklch(0.7 0.12 55);
-  /* Warm artistic theme colors */
-  --accent-gold: oklch(0.75 0.14 75);
-  --accent-copper: oklch(0.6 0.15 50);
-  --accent-warm: oklch(0.95 0.03 80);
-  /* Greek mythology green theme colors (Persephone - spring/vegetation goddess) */
-  --accent-green: oklch(0.65 0.15 145);
-  --accent-green-light: oklch(0.85 0.08 145);
-  --accent-emerald: oklch(0.55 0.18 160);
-  --accent-mint: oklch(0.92 0.04 140);
+  --sidebar: #033f47;
+  --sidebar-foreground: #eef3db;
+  --sidebar-primary: #e0f780;
+  --sidebar-primary-foreground: #033f47;
+  --sidebar-accent: #054952;
+  --sidebar-accent-foreground: #eef3db;
+  --sidebar-border: #054952;
+  --sidebar-ring: #e0f780;
+  /* Primary Green (Slytherin-inspired) */
+  --primary-green: #1a5d4a;
+  --primary-green-dark: #0d3d2f;
+  --primary-green-light: #2d8b53;
+  /* Secondary Gold (Hufflepuff-inspired) */
+  --secondary-gold: #e0f780;
+  --secondary-gold-dark: #b8c966;
+  --secondary-gold-light: #deff58;
+  /* Greek theme */
+  --greek-marble: #f5f5f0;
+  --greek-olive: #808000;
 }
 
 .dark {
-  --background: oklch(0.15 0.02 60);
-  --foreground: oklch(0.95 0.01 80);
-  --card: oklch(0.2 0.02 55);
-  --card-foreground: oklch(0.95 0.01 80);
-  --popover: oklch(0.2 0.02 55);
-  --popover-foreground: oklch(0.95 0.01 80);
-  --primary: oklch(0.8 0.14 70);
-  --primary-foreground: oklch(0.15 0.02 60);
-  --secondary: oklch(0.28 0.03 55);
-  --secondary-foreground: oklch(0.95 0.01 80);
-  --muted: oklch(0.28 0.03 55);
-  --muted-foreground: oklch(0.7 0.03 70);
-  --accent: oklch(0.28 0.05 60);
-  --accent-foreground: oklch(0.95 0.01 80);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(0.3 0.03 55);
-  --input: oklch(0.25 0.03 55);
-  --ring: oklch(0.75 0.12 70);
-  --chart-1: oklch(0.8 0.14 70);
-  --chart-2: oklch(0.7 0.15 55);
-  --chart-3: oklch(0.6 0.16 50);
-  --chart-4: oklch(0.55 0.14 60);
-  --chart-5: oklch(0.5 0.12 55);
-  --sidebar: oklch(0.18 0.02 55);
-  --sidebar-foreground: oklch(0.95 0.01 80);
-  --sidebar-primary: oklch(0.75 0.14 70);
-  --sidebar-primary-foreground: oklch(0.15 0.02 60);
-  --sidebar-accent: oklch(0.28 0.05 60);
-  --sidebar-accent-foreground: oklch(0.95 0.01 80);
-  --sidebar-border: oklch(0.3 0.03 55);
-  --sidebar-ring: oklch(0.75 0.12 70);
-  /* Warm artistic theme colors */
-  --accent-gold: oklch(0.8 0.14 70);
-  --accent-copper: oklch(0.65 0.16 50);
-  --accent-warm: oklch(0.25 0.04 60);
-  /* Greek mythology green theme colors (Persephone) */
-  --accent-green: oklch(0.7 0.16 145);
-  --accent-green-light: oklch(0.3 0.06 145);
-  --accent-emerald: oklch(0.6 0.2 160);
-  --accent-mint: oklch(0.35 0.05 140);
+  --background: #011e24;
+  --foreground: #b6cbce;
+  --card: #033f47;
+  --card-foreground: #eef3db;
+  --popover: #033f47;
+  --popover-foreground: #eef3db;
+  --primary: #e0f780;
+  --primary-foreground: #033f47;
+  --secondary: #1a5d4a;
+  --secondary-foreground: #eef3db;
+  --muted: #054952;
+  --muted-foreground: #8ab4b8;
+  --accent: #e0f780;
+  --accent-foreground: #033f47;
+  --destructive: #dc2626;
+  --border: #054952;
+  --input: #054952;
+  --ring: #e0f780;
+  --chart-1: #e0f780;
+  --chart-2: #1a5d4a;
+  --chart-3: #deff58;
+  --chart-4: #033f47;
+  --chart-5: #2d8b53;
+  --sidebar: #033f47;
+  --sidebar-foreground: #eef3db;
+  --sidebar-primary: #e0f780;
+  --sidebar-primary-foreground: #033f47;
+  --sidebar-accent: #054952;
+  --sidebar-accent-foreground: #eef3db;
+  --sidebar-border: #054952;
+  --sidebar-ring: #e0f780;
+  --primary-green: #1a5d4a;
+  --primary-green-dark: #0d3d2f;
+  --primary-green-light: #2d8b53;
+  --secondary-gold: #e0f780;
+  --secondary-gold-dark: #b8c966;
+  --secondary-gold-light: #deff58;
+  --greek-marble: #f5f5f0;
+  --greek-olive: #808000;
 }
 
 @layer base {
