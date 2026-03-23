@@ -2,6 +2,7 @@
 
 import { useState, Suspense } from "react";
 import dynamic from "next/dynamic";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   EnvelopeIcon,
@@ -71,6 +72,16 @@ export default function ContactPage() {
       <Suspense fallback={null}>
         <ThreeScene />
       </Suspense>
+
+      <div className="absolute inset-0 -z-20 opacity-[0.05]">
+        <Image
+          src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/images/kiss.jpg`}
+          alt="The Kiss by Gustav Klimt - decorative background"
+          fill
+          className="object-cover object-top"
+          priority
+        />
+      </div>
 
       <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
       <motion.div
