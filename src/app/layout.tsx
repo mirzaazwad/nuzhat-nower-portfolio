@@ -32,6 +32,11 @@ export const metadata: Metadata = {
     "Dhaka",
     "Bangladesh",
   ],
+  icons: [
+    {
+      url: `${process.env.NEXT_PUBLIC_BASE_PATH}images/frida.png`,
+    },
+  ],
 };
 
 export default function RootLayout({
@@ -48,7 +53,7 @@ export default function RootLayout({
         geistSans.variable,
         geistMono.variable,
         "font-sans",
-        jetbrainsMono.variable
+        jetbrainsMono.variable,
       )}
     >
       <body className="min-h-full flex flex-col">
