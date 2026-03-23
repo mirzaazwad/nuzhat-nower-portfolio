@@ -6,10 +6,12 @@ import { Badge } from "@/components/ui/badge";
 import type { StaticImageData } from "next/image";
 import dynamic from "next/dynamic";
 
-const PdfSnapshot = dynamic(
-  () => import("./pdf-snapshot"),
-  { ssr: false, loading: () => <div className="w-[350px] aspect-[1/1.4] animate-pulse bg-muted-foreground/10 rounded-sm" /> }
-);
+const PdfSnapshot = dynamic(() => import("./pdf-snapshot"), {
+  ssr: false,
+  loading: () => (
+    <div className="w-87.5 aspect-[1/1.4] animate-pulse bg-muted-foreground/10 rounded-sm" />
+  ),
+});
 
 interface PublicationCardProps {
   id: string;
@@ -41,20 +43,28 @@ export function PublicationCard({
       <div className="aspect-4/3 bg-muted relative overflow-hidden flex items-start justify-center pt-8">
         <div className="w-[85%] origin-top hover:scale-[1.02] transition-transform duration-500 ease-out shadow-lg opacity-80 group-hover:opacity-100">
           <PdfSnapshot
-            file={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/${typeof pdf === "string" ? pdf : pdf.src}`}
+            file={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}${typeof pdf === "string" ? pdf : pdf.src}`}
           />
         </div>
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-card to-transparent pointer-events-none" />
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-card to-transparent pointer-events-none" />
       </div>
 
       {/* Content */}
       <div className="p-6">
         <div className="flex items-center gap-2 mb-3">
-          <Badge variant="secondary" className="flex items-center gap-1.5 bg-secondary-gold/10 border border-secondary-gold/30 text-foreground">
+          <Badge
+            variant="secondary"
+            className="flex items-center gap-1.5 bg-secondary-gold/10 border border-secondary-gold/30 text-foreground"
+          >
             <CalendarIcon className="size-3" />
             {date}
           </Badge>
-          <Badge variant="outline" className="border-border text-muted-foreground">{venue}</Badge>
+          <Badge
+            variant="outline"
+            className="border-border text-muted-foreground"
+          >
+            {venue}
+          </Badge>
         </div>
 
         <h3 className="text-xl font-semibold tracking-tight mb-2 text-foreground group-hover:text-secondary-gold transition-colors">
@@ -66,7 +76,7 @@ export function PublicationCard({
         </p>
 
         <a
-          href={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/${typeof pdf === "string" ? pdf : pdf.src}`}
+          href={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}${typeof pdf === "string" ? pdf : pdf.src}`}
           target="_blank"
           rel="noopener noreferrer"
           className="inline-flex items-center gap-2 text-sm font-medium text-secondary-gold hover:text-secondary-gold-light transition-colors"
