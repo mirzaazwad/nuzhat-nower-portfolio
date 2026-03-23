@@ -1,11 +1,14 @@
 "use client";
 
-import { useRef, useMemo } from "react";
+import { useRef } from "react";
 import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 // Persephone's pomegranate - symbol of the underworld
-function Pomegranate({ position = [0, 0, 0] as [number, number, number], scale = 1 }) {
+function Pomegranate({
+  position = [0, 0, 0] as [number, number, number],
+  scale = 1,
+}) {
   const mesh = useRef<THREE.Mesh>(null);
 
   useFrame((state) => {
@@ -30,7 +33,15 @@ function Pomegranate({ position = [0, 0, 0] as [number, number, number], scale =
 }
 
 // Spring flower for Persephone (representing spring growth)
-function SpringFlower({ position, color = "#ff69b4", delay = 0 }: { position: [number, number, number]; color?: string; delay?: number }) {
+function SpringFlower({
+  position,
+  color = "#ff69b4",
+  delay = 0,
+}: {
+  position: [number, number, number];
+  color?: string;
+  delay?: number;
+}) {
   const group = useRef<THREE.Group>(null);
   const petalCount = 5;
 
@@ -57,7 +68,7 @@ function SpringFlower({ position, color = "#ff69b4", delay = 0 }: { position: [n
           position={[
             Math.cos((i / petalCount) * Math.PI * 2) * 0.08,
             Math.sin((i / petalCount) * Math.PI * 2) * 0.08,
-            0
+            0,
           ]}
         >
           <planeGeometry args={[0.08, 0.15]} />
@@ -80,7 +91,13 @@ function SpringFlower({ position, color = "#ff69b4", delay = 0 }: { position: [n
 }
 
 // Wheat/grain stalks (Demeter/Persephone connection)
-function WheatStalk({ position, delay = 0 }: { position: [number, number, number]; delay?: number }) {
+function WheatStalk({
+  position,
+  delay = 0,
+}: {
+  position: [number, number, number];
+  delay?: number;
+}) {
   const mesh = useRef<THREE.Group>(null);
 
   useFrame((state) => {
@@ -107,7 +124,13 @@ function WheatStalk({ position, delay = 0 }: { position: [number, number, number
 }
 
 // Persephone's crown of flowers
-function FlowerCrown({ radius = 0.5, flowerCount = 8 }: { radius?: number; flowerCount?: number }) {
+function FlowerCrown({
+  radius = 0.5,
+  flowerCount = 8,
+}: {
+  radius?: number;
+  flowerCount?: number;
+}) {
   const group = useRef<THREE.Group>(null);
 
   useFrame((state) => {
@@ -138,7 +161,9 @@ function FlowerCrown({ radius = 0.5, flowerCount = 8 }: { radius?: number; flowe
 }
 
 // Main Persephone flora component
-export function PersephoneFlora({ variant = "spring" as "spring" | "underworld" | "crown" }) {
+export function PersephoneFlora({
+  variant = "spring" as "spring" | "underworld" | "crown",
+}) {
   if (variant === "crown") {
     return (
       <>

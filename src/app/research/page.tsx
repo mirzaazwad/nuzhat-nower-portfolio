@@ -1,13 +1,8 @@
-import { Metadata } from "next";
+"use client";
 import { PageHeader } from "@/components/shared";
 import { AnimatedSection } from "@/components/shared";
 import { publications } from "@/lib/data/content";
 import { PublicationCard } from "@/features/research/components";
-
-export const metadata: Metadata = {
-  title: "Research | Nuzhat Nower",
-  description: "Academic publications and research work by Nuzhat Nower.",
-};
 
 export default function ResearchPage() {
   return (
@@ -16,7 +11,6 @@ export default function ResearchPage() {
         accent="Research"
         title="Publications"
         subtitle="My academic contributions in natural language processing and health informatics."
-        themeColor="green"
       />
 
       <div className="grid gap-8 md:grid-cols-2">

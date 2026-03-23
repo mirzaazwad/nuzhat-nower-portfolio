@@ -1,13 +1,8 @@
-import { Metadata } from "next";
+"use client";
 import { PageHeader } from "@/components/shared";
 import { AnimatedSection } from "@/components/shared";
 import { projects } from "@/lib/data/content";
 import { ProjectCard } from "@/features/work/components";
-
-export const metadata: Metadata = {
-  title: "Work | Nuzhat Nower",
-  description: "Explore the projects and work of Nuzhat Nower - Project Manager and former developer.",
-};
 
 export default function WorkPage() {
   return (
@@ -16,7 +11,6 @@ export default function WorkPage() {
         accent="Work"
         title="My Projects"
         subtitle="A collection of projects I've worked on, showcasing my skills in project management, web development, and mobile applications."
-        themeColor="mixed"
       />
 
       <div className="grid gap-8 md:grid-cols-2">

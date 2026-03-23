@@ -16,7 +16,7 @@ function GreenParticles({ count = 100 }) {
           (Math.random() - 0.5) * 20,
           (Math.random() - 0.5) * 20,
           (Math.random() - 0.5) * 10,
-        ],
+        ] as [number, number, number], 
         scale: Math.random() * 0.1 + 0.02,
         speed: Math.random() * 0.5 + 0.1,
         rotation: Math.random() * Math.PI * 2,
@@ -37,7 +37,7 @@ function GreenParticles({ count = 100 }) {
       dummy.position.set(
         particle.position[0] + Math.sin(time * speed + i) * 0.5,
         particle.position[1] + Math.cos(time * speed * 0.5 + i) * 0.3,
-        particle.position[2]
+        particle.position[2],
       );
 
       dummy.rotation.z = particle.rotation + time * speed * 0.1;
@@ -94,8 +94,10 @@ function GoldParticles({ count = 80 }) {
 
       dummy.position.set(
         petal.position[0] + Math.sin(time * petal.speed + petal.phase) * 0.8,
-        petal.position[1] + Math.cos(time * petal.speed * 0.7 + petal.phase) * 0.5 - (time * 0.05) % 10,
-        petal.position[2] + Math.sin(time * petal.speed * 0.3) * 0.3
+        petal.position[1] +
+          Math.cos(time * petal.speed * 0.7 + petal.phase) * 0.5 -
+          ((time * 0.05) % 10),
+        petal.position[2] + Math.sin(time * petal.speed * 0.3) * 0.3,
       );
 
       dummy.rotation.x = petal.rotation + time * 0.2;
@@ -145,7 +147,8 @@ function FloatingFlowers({ count = 30 }) {
   const dummy = useMemo(() => new THREE.Object3D(), []);
   const flowerShape = useMemo(() => {
     const shape = new THREE.Shape();
-    const x = 0, y = 0;
+    const x = 0,
+      y = 0;
     shape.moveTo(x, y + 0.5);
     shape.bezierCurveTo(x + 0.5, y + 0.5, x + 0.5, y, x, y - 0.5);
     shape.bezierCurveTo(x - 0.5, y, x - 0.5, y + 0.5, x, y + 0.5);
@@ -160,8 +163,9 @@ function FloatingFlowers({ count = 30 }) {
 
       dummy.position.set(
         flower.position[0] + Math.sin(time * flower.speed + flower.phase) * 1,
-        flower.position[1] + Math.cos(time * flower.speed * 0.8 + flower.phase) * 0.6,
-        flower.position[2]
+        flower.position[1] +
+          Math.cos(time * flower.speed * 0.8 + flower.phase) * 0.6,
+        flower.position[2],
       );
 
       dummy.rotation.z = time * flower.speed * 0.2;
@@ -188,10 +192,14 @@ function FloatingFlowers({ count = 30 }) {
 }
 
 // Main artistic scene combining all elements
-export function ArtisticScene({ intensity = "medium" as "low" | "medium" | "high" }) {
-  const greenCount = intensity === "low" ? 50 : intensity === "medium" ? 100 : 150;
+export function ArtisticScene({
+  intensity = "medium" as "low" | "medium" | "high",
+}) {
+  const greenCount =
+    intensity === "low" ? 50 : intensity === "medium" ? 100 : 150;
   const goldCount = intensity === "low" ? 25 : intensity === "medium" ? 50 : 80;
-  const flowerCount = intensity === "low" ? 15 : intensity === "medium" ? 30 : 50;
+  const flowerCount =
+    intensity === "low" ? 15 : intensity === "medium" ? 30 : 50;
 
   return (
     <>

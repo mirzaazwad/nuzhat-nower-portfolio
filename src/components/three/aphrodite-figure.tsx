@@ -5,7 +5,10 @@ import { useFrame } from "@react-three/fiber";
 import * as THREE from "three";
 
 // Aphrodite-inspired decorative shell spiral
-function ShellSpiral({ position = [0, 0, 0] as [number, number, number], scale = 1 }) {
+function ShellSpiral({
+  position = [0, 0, 0] as [number, number, number],
+  scale = 1,
+}) {
   const mesh = useRef<THREE.Mesh>(null);
 
   const shellGeometry = useMemo(() => {
@@ -18,11 +21,13 @@ function ShellSpiral({ position = [0, 0, 0] as [number, number, number], scale =
       const angle = i * 0.3;
       const radius = 0.1 + t * 0.4;
 
-      points.push(new THREE.Vector3(
-        Math.cos(angle) * radius,
-        Math.sin(angle) * radius,
-        t * 0.5
-      ));
+      points.push(
+        new THREE.Vector3(
+          Math.cos(angle) * radius,
+          Math.sin(angle) * radius,
+          t * 0.5,
+        ),
+      );
     }
 
     const curve = new THREE.CatmullRomCurve3(points);
@@ -51,7 +56,10 @@ function ShellSpiral({ position = [0, 0, 0] as [number, number, number], scale =
 }
 
 // Aphrodite's golden apple - symbol of beauty
-function GoldenApple({ position = [0, 0, 0] as [number, number, number], scale = 1 }) {
+function GoldenApple({
+  position = [0, 0, 0] as [number, number, number],
+  scale = 1,
+}) {
   const mesh = useRef<THREE.Mesh>(null);
 
   useFrame((state) => {
@@ -76,7 +84,13 @@ function GoldenApple({ position = [0, 0, 0] as [number, number, number], scale =
 }
 
 // Rose petals for Aphrodite
-function RosePetal({ position, delay = 0 }: { position: [number, number, number]; delay?: number }) {
+function RosePetal({
+  position,
+  delay = 0,
+}: {
+  position: [number, number, number];
+  delay?: number;
+}) {
   const mesh = useRef<THREE.Mesh>(null);
 
   useFrame((state) => {
@@ -101,7 +115,9 @@ function RosePetal({ position, delay = 0 }: { position: [number, number, number]
 }
 
 // Main Aphrodite figure component
-export function AphroditeFigure({ variant = "shell" as "shell" | "apple" | "petals" | "combined" }) {
+export function AphroditeFigure({
+  variant = "shell" as "shell" | "apple" | "petals" | "combined",
+}) {
   if (variant === "combined") {
     return (
       <>

@@ -1,5 +1,4 @@
 "use client";
-
 import { motion } from "framer-motion";
 import Image from "next/image";
 import { PageHeader } from "@/components/shared";
@@ -16,7 +15,6 @@ export default function AboutPage() {
         accent="About"
         title="Education & Experience"
         subtitle="My journey from developer to project manager, building skills across multiple domains."
-        themeColor="green"
       />
 
       {/* Bio Section with Greek Theme */}
@@ -67,8 +65,6 @@ export default function AboutPage() {
               <p className="text-muted-foreground leading-relaxed">
                 {personalInfo.bio}
               </p>
-
-              {/* Greek mythology & Harry Potter inspired tagline */}
               <motion.p
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -79,50 +75,6 @@ export default function AboutPage() {
                 Aphrodite, and the resilience of Persephone.&rdquo;
               </motion.p>
             </div>
-          </div>
-        </div>
-      </AnimatedSection>
-
-      {/* House Values Section - Harry Potter Theme */}
-      <AnimatedSection className="mb-16">
-        <div className="bg-card rounded-2xl border border-border p-6 md:p-8">
-          <h2 className="text-xl font-bold mb-6 text-secondary-gold">
-            Core Values
-          </h2>
-          <div className="grid gap-4 md:grid-cols-2">
-            {/* Hufflepuff values */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.1 }}
-              className="p-4 rounded-lg border-2 border-secondary-gold bg-secondary-gold/5"
-            >
-              <h3 className="font-bold text-secondary-gold mb-2">
-                Hufflepuff Dedication
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                &ldquo;Those patient Hufflepuffs are true and unafraid of
-                toil.&rdquo; - Valuing hard work, patience, loyalty, and fair
-                play.
-              </p>
-            </motion.div>
-
-            {/* Slytherin values (without snake reference) */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-              className="p-4 rounded-lg border-2 border-primary-green bg-primary-green/5"
-            >
-              <h3 className="font-bold text-primary-green-light mb-2">
-                Slytherin Ambition
-              </h3>
-              <p className="text-sm text-muted-foreground">
-                &ldquo;Those cunning folks use any means to achieve their
-                ends.&rdquo; - Driven by ambition, cunning, leadership, and
-                resourcefulness.
-              </p>
-            </motion.div>
           </div>
         </div>
       </AnimatedSection>

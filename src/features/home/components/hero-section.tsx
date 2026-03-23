@@ -1,6 +1,7 @@
 "use client";
 
-import { Suspense, lazy } from "react";
+import { Suspense } from "react";
+import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
@@ -9,18 +10,21 @@ import { personalInfo } from "@/lib/data/content";
 import { Button } from "@/components/ui/button";
 import { LaurelWreath } from "@/components/decorative/laurel-wreath";
 
-// Lazy load Three.js components for better performance
-const ThreeCanvas = lazy(() => import("@/components/three/three-canvas").then(mod => ({ default: mod.ThreeCanvas })));
-const ArtisticScene = lazy(() => import("@/components/three/artistic-scene").then(mod => ({ default: mod.ArtisticScene })));
+// Dynamically import Three.js components — ssr:false is required for WebGL/R3F
+const ThreeScene = dynamic(
+  () =>
+    import("@/components/three/three-scene").then((mod) => ({
+      default: mod.ThreeScene,
+    })),
+  { ssr: false },
+);
 
 export function HeroSection() {
   return (
-    <section className="relative min-h-[85vh] flex items-center overflow-hidden bg-background">
+    <section className="relative z-0 min-h-[85vh] flex items-center overflow-hidden bg-background">
       {/* Three.js Artistic Background */}
       <Suspense fallback={null}>
-        <ThreeCanvas className="opacity-30">
-          <ArtisticScene intensity="low" />
-        </ThreeCanvas>
+        <ThreeScene />
       </Suspense>
 
       {/* Klimt "The Kiss" background with overlay */}
@@ -29,7 +33,7 @@ export function HeroSection() {
           src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/images/kiss.jpg`}
           alt="The Kiss by Gustav Klimt - decorative background"
           fill
-          className="object-cover"
+          className="object-cover object-top"
           priority
         />
       </div>
@@ -181,7 +185,7 @@ export function HeroSection() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6, delay: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden lg:block"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}

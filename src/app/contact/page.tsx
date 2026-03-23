@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
+import dynamic from "next/dynamic";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   EnvelopeIcon,
@@ -16,7 +17,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
-// Trail particles for animation
+const ThreeScene = dynamic(
+  () =>
+    import("@/components/three/three-scene").then((mod) => ({
+      default: mod.ThreeScene,
+    })),
+  { ssr: false },
+);
+
 function TrailParticle({ delay }: { delay: number }) {
   return (
     <motion.div
@@ -59,7 +67,12 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-16 md:py-24 bg-background">
+    <div className="relative z-0 min-h-screen overflow-hidden bg-background">
+      <Suspense fallback={null}>
+        <ThreeScene />
+      </Suspense>
+
+      <div className="container mx-auto px-4 py-16 md:py-24 relative z-10">
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
@@ -76,22 +89,34 @@ export default function ContactPage() {
             {/* Paper plane with flight animation */}
             <motion.div
               className="absolute inset-0 flex items-center justify-center"
-              animate={isAnimating ? {
-                x: [0, 100, 200],
-                y: [0, -50, -150],
-                rotate: [0, 45, 90],
-                scale: [1, 0.8, 0.5],
-                opacity: [1, 1, 0]
-              } : {}}
+              animate={
+                isAnimating
+                  ? {
+                      x: [0, 100, 200],
+                      y: [0, -50, -150],
+                      rotate: [0, 45, 90],
+                      scale: [1, 0.8, 0.5],
+                      opacity: [1, 1, 0],
+                    }
+                  : {}
+              }
               transition={{ duration: 1.5, ease: "easeOut" }}
             >
               <motion.div
                 className="text-secondary-gold"
-                animate={isAnimating ? {} : {
-                  y: [0, -5, 0],
-                  rotate: [0, -2, 2, 0]
+                animate={
+                  isAnimating
+                    ? {}
+                    : {
+                        y: [0, -5, 0],
+                        rotate: [0, -2, 2, 0],
+                      }
+                }
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: "easeInOut",
                 }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
               >
                 <PaperPlaneTiltIcon size={48} weight="fill" />
               </motion.div>
@@ -122,21 +147,19 @@ export default function ContactPage() {
                       animate={{ scale: 1 }}
                       className="absolute inset-0 bg-secondary-gold/20 rounded-full"
                     />
-                    <CheckCircleIcon size={48} weight="fill" className="text-secondary-gold relative z-10" />
+                    <CheckCircleIcon
+                      size={48}
+                      weight="fill"
+                      className="text-secondary-gold relative z-10"
+                    />
                   </div>
                 </motion.div>
               )}
             </AnimatePresence>
           </div>
         </motion.div>
-
-        <span className="inline-block px-3 py-1 rounded-md text-sm font-medium tracking-wider uppercase text-primary-green-light bg-secondary-gold/10 border border-secondary-gold/30 mb-4">
-          Contact
-        </span>
         <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold tracking-tight text-foreground">
-          <span className="text-secondary-gold">
-            Send a Message
-          </span>
+          <span className="text-secondary-gold">Send a Message</span>
         </h1>
         <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
           Write your message, fold it into a paper plane, and send it my way!
@@ -153,12 +176,18 @@ export default function ContactPage() {
         >
           <div className="bg-card rounded-2xl border border-border p-6 md:p-8 relative overflow-hidden">
             {/* Folded corner effect */}
-            <div className="absolute top-0 right-0 w-16 h-16 bg-secondary-gold/20" style={{ clipPath: "polygon(100% 0, 100% 100%, 0 0)" }} />
+            <div
+              className="absolute top-0 right-0 w-16 h-16 bg-secondary-gold/20"
+              style={{ clipPath: "polygon(100% 0, 100% 100%, 0 0)" }}
+            />
 
             <form onSubmit={handleSubmit} className="space-y-6 relative">
               <div className="grid gap-6 sm:grid-cols-2">
                 <div className="space-y-2">
-                  <label htmlFor="name" className="text-sm font-medium text-foreground">
+                  <label
+                    htmlFor="name"
+                    className="text-sm font-medium text-foreground"
+                  >
                     Name
                   </label>
                   <Input
@@ -173,7 +202,10 @@ export default function ContactPage() {
                   />
                 </div>
                 <div className="space-y-2">
-                  <label htmlFor="email" className="text-sm font-medium text-foreground">
+                  <label
+                    htmlFor="email"
+                    className="text-sm font-medium text-foreground"
+                  >
                     Email
                   </label>
                   <Input
@@ -190,7 +222,10 @@ export default function ContactPage() {
                 </div>
               </div>
               <div className="space-y-2">
-                <label htmlFor="subject" className="text-sm font-medium text-foreground">
+                <label
+                  htmlFor="subject"
+                  className="text-sm font-medium text-foreground"
+                >
                   Subject
                 </label>
                 <Input
@@ -205,7 +240,10 @@ export default function ContactPage() {
                 />
               </div>
               <div className="space-y-2">
-                <label htmlFor="message" className="text-sm font-medium text-foreground">
+                <label
+                  htmlFor="message"
+                  className="text-sm font-medium text-foreground"
+                >
                   Message
                 </label>
                 <Textarea
@@ -241,7 +279,9 @@ export default function ContactPage() {
           className="space-y-8"
         >
           <div className="bg-card rounded-2xl border border-border p-6 md:p-8 space-y-6">
-            <h2 className="text-xl font-bold text-secondary-gold">Contact Information</h2>
+            <h2 className="text-xl font-bold text-secondary-gold">
+              Contact Information
+            </h2>
 
             <div className="space-y-4">
               <a
@@ -253,7 +293,9 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Email</p>
-                  <p className="font-medium text-foreground">{personalInfo.email}</p>
+                  <p className="font-medium text-foreground">
+                    {personalInfo.email}
+                  </p>
                 </div>
               </a>
 
@@ -266,7 +308,9 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Phone</p>
-                  <p className="font-medium text-foreground">{personalInfo.phone}</p>
+                  <p className="font-medium text-foreground">
+                    {personalInfo.phone}
+                  </p>
                 </div>
               </a>
 
@@ -276,7 +320,9 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <p className="text-sm text-muted-foreground">Location</p>
-                  <p className="font-medium text-foreground">{personalInfo.location}</p>
+                  <p className="font-medium text-foreground">
+                    {personalInfo.location}
+                  </p>
                 </div>
               </div>
             </div>
@@ -284,7 +330,9 @@ export default function ContactPage() {
 
           {/* Social Links */}
           <div className="bg-card rounded-2xl border border-border p-6 md:p-8">
-            <h2 className="text-xl font-bold mb-4 text-secondary-gold">Connect With Me</h2>
+            <h2 className="text-xl font-bold mb-4 text-secondary-gold">
+              Connect With Me
+            </h2>
             <div className="flex gap-4">
               <a
                 href={personalInfo.socialLinks.linkedin}
@@ -315,6 +363,7 @@ export default function ContactPage() {
           </div>
         </motion.div>
       </div>
+    </div>
     </div>
   );
 }
