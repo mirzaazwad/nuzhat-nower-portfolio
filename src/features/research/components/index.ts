@@ -1,0 +1,1 @@
+export { PublicationCard } from "./publication-card";
