@@ -32,13 +32,15 @@ jobs:
                   node-version: 20
                   cache: "npm"
 
-            - name: Setup Pages
-              uses: actions/configure-pages@v5
-              with:
-                  static_site_generator: next
-
             - name: Install dependencies
               run: npm ci
+
+            - name: Debug env
+              run: |
+                  echo "Base path is set: ${{ secrets.NEXT_PUBLIC_BASE_PATH != '' }}"
+                  echo "NEXT_PUBLIC_BASE_PATH length: ${#NEXT_PUBLIC_BASE_PATH}"
+              env:
+                  NEXT_PUBLIC_BASE_PATH: ${{ secrets.NEXT_PUBLIC_BASE_PATH }}
 
             - name: Build with Next.js
               run: npm run build
