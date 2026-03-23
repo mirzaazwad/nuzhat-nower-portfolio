@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   ],
   icons: [
     {
-      url: `${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "/" : process.env.NEXT_PUBLIC_BASE_PATH}images/frida.png`,
+      url: `${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "/" : process.env.NEXT_PUBLIC_BASE_PATH + "/"}images/frida.png`,
     },
   ],
 };
