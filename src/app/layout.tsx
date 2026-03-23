@@ -4,6 +4,7 @@ import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
 import { cn } from "@/lib/utils";
 import "./globals.css";
+import ScrollIndicator from "@/components/shared/scroll-indicator";
 
 const jetbrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -34,7 +35,7 @@ export const metadata: Metadata = {
   ],
   icons: [
     {
-      url: `${process.env.NEXT_PUBLIC_BASE_PATH}images/frida.png`,
+      url: `${process.env.NEXT_PUBLIC_BASE_PATH}/images/frida.png`,
     },
   ],
 };
@@ -59,6 +60,7 @@ export default function RootLayout({
       <body className="min-h-full flex flex-col">
         <Navbar />
         <main className="flex-1 pt-16">{children}</main>
+        <ScrollIndicator />
         <Footer />
       </body>
     </html>
