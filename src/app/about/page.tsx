@@ -47,7 +47,7 @@ export default function AboutPage() {
                 <div className="absolute inset-2 rounded-full border-2 border-primary-green" />
                 <div className="absolute inset-4 rounded-full overflow-hidden">
                   <Image
-                    src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/images/kiss.jpg`}
+                    src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/images/frida.jpg`}
                     alt={personalInfo.name}
                     fill
                     className="object-cover"
