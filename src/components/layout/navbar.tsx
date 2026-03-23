@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { TransitionLink } from "@/components/shared";
 import { useState } from "react";
 import {
   ListIcon,
@@ -30,7 +31,7 @@ export function Navbar() {
         <ul className="hidden md:flex items-center gap-1">
           {navigation.map((item) => (
             <li key={item.name}>
-              <Link
+              <TransitionLink
                 href={item.href}
                 className={cn(
                   "px-3 py-2 text-sm font-medium transition-colors hover:text-accent-green rounded-lg",
@@ -40,7 +41,7 @@ export function Navbar() {
                 )}
               >
                 {item.name}
-              </Link>
+              </TransitionLink>
             </li>
           ))}
         </ul>
@@ -57,7 +58,7 @@ export function Navbar() {
                 <ul className="flex flex-col gap-2">
                   {navigation.map((item) => (
                     <li key={item.name}>
-                      <Link
+                      <TransitionLink
                         href={item.href}
                         onClick={() => setIsOpen(false)}
                         className={cn(
@@ -68,7 +69,7 @@ export function Navbar() {
                         )}
                       >
                         {item.name}
-                      </Link>
+                      </TransitionLink>
                     </li>
                   ))}
                 </ul>

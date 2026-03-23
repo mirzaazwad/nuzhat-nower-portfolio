@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, JetBrains_Mono } from "next/font/google";
 import { Navbar } from "@/components/layout/navbar";
 import { Footer } from "@/components/layout/footer";
+import { TransitionProvider, TransitionLayout } from "@/components/shared";
 import { cn } from "@/lib/utils";
 import "./globals.css";
 import ScrollIndicator from "@/components/shared/scroll-indicator";
@@ -58,10 +59,16 @@ export default function RootLayout({
       )}
     >
       <body className="min-h-full flex flex-col">
-        <Navbar />
-        <main className="flex-1 pt-16">{children}</main>
-        <ScrollIndicator />
-        <Footer />
+        <TransitionProvider>
+          <Navbar />
+          <main className="flex-1 pt-16">
+            <TransitionLayout>
+              {children}
+            </TransitionLayout>
+          </main>
+          <ScrollIndicator />
+          <Footer />
+        </TransitionProvider>
       </body>
     </html>
   );
