@@ -4,7 +4,7 @@ import Image from "next/image";
 import { PageHeader } from "@/components/shared";
 import { AnimatedSection } from "@/components/shared";
 import { personalInfo, skills } from "@/lib/data/content";
-import { ExperienceCard } from "@/features/about/components";
+import { ExperienceCard, SkillPillars3D } from "@/features/about/components";
 import { GreekColumn } from "@/components/decorative/greek-column";
 import { LaurelWreath } from "@/components/decorative/laurel-wreath";
 
@@ -16,6 +16,7 @@ export default function AboutPage() {
         title="Education & Experience"
         subtitle="My journey from developer to project manager, building skills across multiple domains."
       />
+
       {/* Bio Section with Greek Theme */}
       <AnimatedSection className="mb-16">
         <div className="relative bg-card rounded-2xl border border-border p-6 md:p-8 overflow-hidden">
@@ -35,7 +36,7 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               className="relative shrink-0"
             >
-              {/* Laurel Wreath above - Greek symbol of victory */}
+              {/* Laurel Wreath above */}
               <div className="absolute -top-6 left-1/2 -translate-x-1/2">
                 <LaurelWreath size="md" color="gold" />
               </div>
@@ -84,11 +85,30 @@ export default function AboutPage() {
         <ExperienceCard type="education" />
       </div>
 
-      {/* Skills Section */}
+      {/* ── Skills Section ─────────────────────────────────────────────── */}
       <AnimatedSection>
-        <div className="bg-card rounded-2xl border border-border p-6 md:p-8">
+        {/* DESKTOP — Three.js Corinthian Pillar Scene */}
+        <div className="hidden md:block">
+          <div className="bg-card rounded-2xl border border-border overflow-hidden">
+            {/* header */}
+            <div className="px-6 md:px-8 pt-6 pb-4 flex items-center gap-3 border-b border-border/50">
+              <h2 className="text-xl font-bold text-secondary-gold">
+                Skills &amp; Technologies
+              </h2>
+              <span className="text-xs text-muted-foreground font-serif italic opacity-70">
+                — drag to move pillars, scene auto-orbits
+              </span>
+            </div>
+
+            {/* Three.js canvas */}
+            <SkillPillars3D skills={skills} />
+          </div>
+        </div>
+
+        {/* MOBILE — original chip layout */}
+        <div className="md:hidden bg-card rounded-2xl border border-border p-6">
           <h2 className="text-xl font-bold mb-6 text-secondary-gold">
-            Skills & Technologies
+            Skills &amp; Technologies
           </h2>
           <div className="flex flex-wrap gap-3">
             {skills.map((skill, index) => (
