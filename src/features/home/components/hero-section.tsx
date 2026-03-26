@@ -10,7 +10,6 @@ import { personalInfo } from "@/lib/data/content";
 import { Button } from "@/components/ui/button";
 import { LaurelWreath } from "@/components/decorative/laurel-wreath";
 
-// Dynamically import Three.js components — ssr:false is required for WebGL/R3F
 const ThreeScene = dynamic(
   () =>
     import("@/components/three/three-scene").then((mod) => ({
@@ -22,13 +21,11 @@ const ThreeScene = dynamic(
 export function HeroSection() {
   return (
     <section className="relative z-0 min-h-[85vh] flex items-center overflow-hidden bg-background">
-      {/* Three.js Artistic Background */}
       <Suspense fallback={null}>
         <ThreeScene />
       </Suspense>
 
-      {/* Klimt "The Kiss" background with overlay */}
-      <div className="absolute inset-0 -z-20 opacity-[0.05]">
+      <div className="absolute inset-0 -z-20 opacity-20">
         <Image
           src={`${process.env.NEXT_PUBLIC_BASE_PATH === "/" ? "" : process.env.NEXT_PUBLIC_BASE_PATH}/images/kiss.jpg`}
           alt="The Kiss by Gustav Klimt - decorative background"

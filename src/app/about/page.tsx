@@ -16,7 +16,6 @@ export default function AboutPage() {
         title="Education & Experience"
         subtitle="My journey from developer to project manager, building skills across multiple domains."
       />
-
       {/* Bio Section with Greek Theme */}
       <AnimatedSection className="mb-16">
         <div className="relative bg-card rounded-2xl border border-border p-6 md:p-8 overflow-hidden">
